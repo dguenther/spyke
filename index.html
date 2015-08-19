@@ -1,236 +1,240 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Splatoon Spyke Roll Calculator</title>
-		<script type="text/javascript" src="calc.js"></script>
-	</head>
-	<body>
-		<div id="headgear" class="equipment">
-			<div>Headgear</div>
-			<select class="brand">
-				<option label=" "></option>
-				<option>Amiibo</option>
-				<option>Cuttlegear</option>
-				<option>Famitsu</option>
-				<option>Firefin</option>
-				<option>Forge</option>
-				<option>Inkline</option>
-				<option>KOG</option>
-				<option>Krak-On</option>
-				<option>Rockenberg</option>
-				<option>Skalop</option>
-				<option>Splash Mob</option>
-				<option>Squid Girl</option>
-				<option>SquidForce</option>
-				<option>Takoroka</option>
-				<option>Tentatek</option>
-				<option>Zekko</option>
-				<option>Zink</option>
-			</select>
-			<div class="favored"></div>
-			<div class="unfavored"></div>
-			<div>Subability 1</div>
-			<select class="sub1">
-				<option label=" "></option>
-				<option>Bomb Range Up</option>
-				<option>Damage Up</option>
-				<option>Defense Up</option>
-				<option>Ink Saver (Main)</option>
-				<option>Ink Saver (Sub)</option>
-				<option>Quick Respawn</option>
-				<option>Quick Superjump</option>
-				<option>Run Speed Up</option>
-				<option>Swim Speed Up</option>
-				<option>Special Charge Up</option>
-				<option>Special Duration Up</option>
-				<option>Special Saver</option>
-			</select>
-			<div>Subability 2</div>
-			<select class="sub2">
-				<option label=" "></option>
-				<option>Bomb Range Up</option>
-				<option>Damage Up</option>
-				<option>Defense Up</option>
-				<option>Ink Saver (Main)</option>
-				<option>Ink Saver (Sub)</option>
-				<option>Quick Respawn</option>
-				<option>Quick Superjump</option>
-				<option>Run Speed Up</option>
-				<option>Swim Speed Up</option>
-				<option>Special Charge Up</option>
-				<option>Special Duration Up</option>
-				<option>Special Saver</option>
-			</select>
-			<div>Subability 3</div>
-			<select class="sub3">
-				<option label=" "></option>
-				<option>Bomb Range Up</option>
-				<option>Damage Up</option>
-				<option>Defense Up</option>
-				<option>Ink Saver (Main)</option>
-				<option>Ink Saver (Sub)</option>
-				<option>Quick Respawn</option>
-				<option>Quick Superjump</option>
-				<option>Run Speed Up</option>
-				<option>Swim Speed Up</option>
-				<option>Special Charge Up</option>
-				<option>Special Duration Up</option>
-				<option>Special Saver</option>
-			</select>
-			<div>Odds: <span class="odds"></span></div>
-			<div>Expected Rolls: <span class="expected-rolls"></span></div>
-		</div>
-		<div id="shirt" class="equipment">
-			<div>Shirt</div>
-			<select class="brand">
-				<option label=" "></option>
-				<option>Amiibo</option>
-				<option>Cuttlegear</option>
-				<option>Famitsu</option>
-				<option>Firefin</option>
-				<option>Forge</option>
-				<option>Inkline</option>
-				<option>KOG</option>
-				<option>Krak-On</option>
-				<option>Rockenberg</option>
-				<option>Skalop</option>
-				<option>Splash Mob</option>
-				<option>Squid Girl</option>
-				<option>SquidForce</option>
-				<option>Takoroka</option>
-				<option>Tentatek</option>
-				<option>Zekko</option>
-				<option>Zink</option>
-			</select>
-			<div class="favored"></div>
-			<div class="unfavored"></div>
-			<div>Subability 1</div>
-			<select class="sub1">
-				<option label=" "></option>
-				<option>Bomb Range Up</option>
-				<option>Damage Up</option>
-				<option>Defense Up</option>
-				<option>Ink Saver (Main)</option>
-				<option>Ink Saver (Sub)</option>
-				<option>Quick Respawn</option>
-				<option>Quick Superjump</option>
-				<option>Run Speed Up</option>
-				<option>Swim Speed Up</option>
-				<option>Special Charge Up</option>
-				<option>Special Duration Up</option>
-				<option>Special Saver</option>
-			</select>
-			<div>Subability 2</div>
-			<select class="sub2">
-				<option label=" "></option>
-				<option>Bomb Range Up</option>
-				<option>Damage Up</option>
-				<option>Defense Up</option>
-				<option>Ink Saver (Main)</option>
-				<option>Ink Saver (Sub)</option>
-				<option>Quick Respawn</option>
-				<option>Quick Superjump</option>
-				<option>Run Speed Up</option>
-				<option>Swim Speed Up</option>
-				<option>Special Charge Up</option>
-				<option>Special Duration Up</option>
-				<option>Special Saver</option>
-			</select>
-			<div>Subability 3</div>
-			<select class="sub3">
-				<option label=" "></option>
-				<option>Bomb Range Up</option>
-				<option>Damage Up</option>
-				<option>Defense Up</option>
-				<option>Ink Saver (Main)</option>
-				<option>Ink Saver (Sub)</option>
-				<option>Quick Respawn</option>
-				<option>Quick Superjump</option>
-				<option>Run Speed Up</option>
-				<option>Swim Speed Up</option>
-				<option>Special Charge Up</option>
-				<option>Special Duration Up</option>
-				<option>Special Saver</option>
-			</select>
-			<div>Odds: <span class="odds"></span></div>
-			<div>Expected Rolls: <span class="expected-rolls"></span></div>
-		</div>
-		<div id="shoes" class="equipment">
-			<div>Shoes</div>
-			<select class="brand">
-				<option label=" "></option>
-				<option>Amiibo</option>
-				<option>Cuttlegear</option>
-				<option>Famitsu</option>
-				<option>Firefin</option>
-				<option>Forge</option>
-				<option>Inkline</option>
-				<option>KOG</option>
-				<option>Krak-On</option>
-				<option>Rockenberg</option>
-				<option>Skalop</option>
-				<option>Splash Mob</option>
-				<option>Squid Girl</option>
-				<option>SquidForce</option>
-				<option>Takoroka</option>
-				<option>Tentatek</option>
-				<option>Zekko</option>
-				<option>Zink</option>
-			</select>
-			<div class="favored"></div>
-			<div class="unfavored"></div>
-			<div>Subability 1</div>
-			<select class="sub1">
-				<option label=" "></option>
-				<option>Bomb Range Up</option>
-				<option>Damage Up</option>
-				<option>Defense Up</option>
-				<option>Ink Saver (Main)</option>
-				<option>Ink Saver (Sub)</option>
-				<option>Quick Respawn</option>
-				<option>Quick Superjump</option>
-				<option>Run Speed Up</option>
-				<option>Swim Speed Up</option>
-				<option>Special Charge Up</option>
-				<option>Special Duration Up</option>
-				<option>Special Saver</option>
-			</select>
-			<div>Subability 2</div>
-			<select class="sub2">
-				<option label=" "></option>
-				<option>Bomb Range Up</option>
-				<option>Damage Up</option>
-				<option>Defense Up</option>
-				<option>Ink Saver (Main)</option>
-				<option>Ink Saver (Sub)</option>
-				<option>Quick Respawn</option>
-				<option>Quick Superjump</option>
-				<option>Run Speed Up</option>
-				<option>Swim Speed Up</option>
-				<option>Special Charge Up</option>
-				<option>Special Duration Up</option>
-				<option>Special Saver</option>
-			</select>
-			<div>Subability 3</div>
-			<select class="sub3">
-				<option label=" "></option>
-				<option>Bomb Range Up</option>
-				<option>Damage Up</option>
-				<option>Defense Up</option>
-				<option>Ink Saver (Main)</option>
-				<option>Ink Saver (Sub)</option>
-				<option>Quick Respawn</option>
-				<option>Quick Superjump</option>
-				<option>Run Speed Up</option>
-				<option>Swim Speed Up</option>
-				<option>Special Charge Up</option>
-				<option>Special Duration Up</option>
-				<option>Special Saver</option>
-			</select>
-			<div>Odds: <span class="odds"></span></div>
-			<div>Expected Rolls: <span class="expected-rolls"></span></div>
-		</div>
-		<div>Total Rolls: <span id="total-rolls"></span></div>
-		<div>Based on <a href="https://github.com/Exaskryz/Splatoon-Spyke-Calculator">the awesome work of Exaskryz</a>.</div>
-	</body>
+  <head>
+    <title>Splatoon Spyke Roll Calculator</title>
+    <script type="text/javascript" src="calc.js"></script>
+    <link href="style.css" rel="stylesheet">
+  </head>
+  <body>
+    <h2 class="title">Splatoon Spyke Roll Calculator</h2>
+    <div class="container">
+      <div id="headgear" class="equipment">
+        <div>Headgear</div>
+        <select class="brand">
+          <option label=" "></option>
+          <option>Amiibo</option>
+          <option>Cuttlegear</option>
+          <option>Famitsu</option>
+          <option>Firefin</option>
+          <option>Forge</option>
+          <option>Inkline</option>
+          <option>KOG</option>
+          <option>Krak-On</option>
+          <option>Rockenberg</option>
+          <option>Skalop</option>
+          <option>Splash Mob</option>
+          <option>Squid Girl</option>
+          <option>SquidForce</option>
+          <option>Takoroka</option>
+          <option>Tentatek</option>
+          <option>Zekko</option>
+          <option>Zink</option>
+        </select>
+        <div class="favored"></div>
+        <div class="unfavored"></div>
+        <div>Subability 1</div>
+        <select class="sub1">
+          <option label=" "></option>
+          <option>Bomb Range Up</option>
+          <option>Damage Up</option>
+          <option>Defense Up</option>
+          <option>Ink Saver (Main)</option>
+          <option>Ink Saver (Sub)</option>
+          <option>Quick Respawn</option>
+          <option>Quick Superjump</option>
+          <option>Run Speed Up</option>
+          <option>Swim Speed Up</option>
+          <option>Special Charge Up</option>
+          <option>Special Duration Up</option>
+          <option>Special Saver</option>
+        </select>
+        <div>Subability 2</div>
+        <select class="sub2">
+          <option label=" "></option>
+          <option>Bomb Range Up</option>
+          <option>Damage Up</option>
+          <option>Defense Up</option>
+          <option>Ink Saver (Main)</option>
+          <option>Ink Saver (Sub)</option>
+          <option>Quick Respawn</option>
+          <option>Quick Superjump</option>
+          <option>Run Speed Up</option>
+          <option>Swim Speed Up</option>
+          <option>Special Charge Up</option>
+          <option>Special Duration Up</option>
+          <option>Special Saver</option>
+        </select>
+        <div>Subability 3</div>
+        <select class="sub3">
+          <option label=" "></option>
+          <option>Bomb Range Up</option>
+          <option>Damage Up</option>
+          <option>Defense Up</option>
+          <option>Ink Saver (Main)</option>
+          <option>Ink Saver (Sub)</option>
+          <option>Quick Respawn</option>
+          <option>Quick Superjump</option>
+          <option>Run Speed Up</option>
+          <option>Swim Speed Up</option>
+          <option>Special Charge Up</option>
+          <option>Special Duration Up</option>
+          <option>Special Saver</option>
+        </select>
+        <div>Odds: <span class="odds"></span></div>
+        <div>Expected Rolls: <span class="expected-rolls"></span></div>
+      </div>
+      <div id="shirt" class="equipment">
+        <div>Shirt</div>
+        <select class="brand">
+          <option label=" "></option>
+          <option>Amiibo</option>
+          <option>Cuttlegear</option>
+          <option>Famitsu</option>
+          <option>Firefin</option>
+          <option>Forge</option>
+          <option>Inkline</option>
+          <option>KOG</option>
+          <option>Krak-On</option>
+          <option>Rockenberg</option>
+          <option>Skalop</option>
+          <option>Splash Mob</option>
+          <option>Squid Girl</option>
+          <option>SquidForce</option>
+          <option>Takoroka</option>
+          <option>Tentatek</option>
+          <option>Zekko</option>
+          <option>Zink</option>
+        </select>
+        <div class="favored"></div>
+        <div class="unfavored"></div>
+        <div>Subability 1</div>
+        <select class="sub1">
+          <option label=" "></option>
+          <option>Bomb Range Up</option>
+          <option>Damage Up</option>
+          <option>Defense Up</option>
+          <option>Ink Saver (Main)</option>
+          <option>Ink Saver (Sub)</option>
+          <option>Quick Respawn</option>
+          <option>Quick Superjump</option>
+          <option>Run Speed Up</option>
+          <option>Swim Speed Up</option>
+          <option>Special Charge Up</option>
+          <option>Special Duration Up</option>
+          <option>Special Saver</option>
+        </select>
+        <div>Subability 2</div>
+        <select class="sub2">
+          <option label=" "></option>
+          <option>Bomb Range Up</option>
+          <option>Damage Up</option>
+          <option>Defense Up</option>
+          <option>Ink Saver (Main)</option>
+          <option>Ink Saver (Sub)</option>
+          <option>Quick Respawn</option>
+          <option>Quick Superjump</option>
+          <option>Run Speed Up</option>
+          <option>Swim Speed Up</option>
+          <option>Special Charge Up</option>
+          <option>Special Duration Up</option>
+          <option>Special Saver</option>
+        </select>
+        <div>Subability 3</div>
+        <select class="sub3">
+          <option label=" "></option>
+          <option>Bomb Range Up</option>
+          <option>Damage Up</option>
+          <option>Defense Up</option>
+          <option>Ink Saver (Main)</option>
+          <option>Ink Saver (Sub)</option>
+          <option>Quick Respawn</option>
+          <option>Quick Superjump</option>
+          <option>Run Speed Up</option>
+          <option>Swim Speed Up</option>
+          <option>Special Charge Up</option>
+          <option>Special Duration Up</option>
+          <option>Special Saver</option>
+        </select>
+        <div>Odds: <span class="odds"></span></div>
+        <div>Expected Rolls: <span class="expected-rolls"></span></div>
+      </div>
+      <div id="shoes" class="equipment">
+        <div>Shoes</div>
+        <select class="brand">
+          <option label=" "></option>
+          <option>Amiibo</option>
+          <option>Cuttlegear</option>
+          <option>Famitsu</option>
+          <option>Firefin</option>
+          <option>Forge</option>
+          <option>Inkline</option>
+          <option>KOG</option>
+          <option>Krak-On</option>
+          <option>Rockenberg</option>
+          <option>Skalop</option>
+          <option>Splash Mob</option>
+          <option>Squid Girl</option>
+          <option>SquidForce</option>
+          <option>Takoroka</option>
+          <option>Tentatek</option>
+          <option>Zekko</option>
+          <option>Zink</option>
+        </select>
+        <div class="favored"></div>
+        <div class="unfavored"></div>
+        <div>Subability 1</div>
+        <select class="sub1">
+          <option label=" "></option>
+          <option>Bomb Range Up</option>
+          <option>Damage Up</option>
+          <option>Defense Up</option>
+          <option>Ink Saver (Main)</option>
+          <option>Ink Saver (Sub)</option>
+          <option>Quick Respawn</option>
+          <option>Quick Superjump</option>
+          <option>Run Speed Up</option>
+          <option>Swim Speed Up</option>
+          <option>Special Charge Up</option>
+          <option>Special Duration Up</option>
+          <option>Special Saver</option>
+        </select>
+        <div>Subability 2</div>
+        <select class="sub2">
+          <option label=" "></option>
+          <option>Bomb Range Up</option>
+          <option>Damage Up</option>
+          <option>Defense Up</option>
+          <option>Ink Saver (Main)</option>
+          <option>Ink Saver (Sub)</option>
+          <option>Quick Respawn</option>
+          <option>Quick Superjump</option>
+          <option>Run Speed Up</option>
+          <option>Swim Speed Up</option>
+          <option>Special Charge Up</option>
+          <option>Special Duration Up</option>
+          <option>Special Saver</option>
+        </select>
+        <div>Subability 3</div>
+        <select class="sub3">
+          <option label=" "></option>
+          <option>Bomb Range Up</option>
+          <option>Damage Up</option>
+          <option>Defense Up</option>
+          <option>Ink Saver (Main)</option>
+          <option>Ink Saver (Sub)</option>
+          <option>Quick Respawn</option>
+          <option>Quick Superjump</option>
+          <option>Run Speed Up</option>
+          <option>Swim Speed Up</option>
+          <option>Special Charge Up</option>
+          <option>Special Duration Up</option>
+          <option>Special Saver</option>
+        </select>
+        <div>Odds: <span class="odds"></span></div>
+        <div>Expected Rolls: <span class="expected-rolls"></span></div>
+      </div>
+    </div>
+    <div>Total Rolls: <span id="total-rolls"></span></div>
+    <div class="footer">Based on <a href="https://github.com/Exaskryz/Splatoon-Spyke-Calculator">the awesome work of Exaskryz</a>.</div>
+  </body>
 </html>
