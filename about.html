@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>About - Splatoon Spyke Roll Calculator</title>
+    <link href="style.css" rel="stylesheet">
+  </head>
+  <body>
+    <a href="index.html">Home</a>
+    <h2>Intro</h2>
+    <p>If you spot any corrections or have an idea for improving this calculator, please feel free to submit an issue or pull request to the GitHub repo for this site, <a href="https://github.com/dguenther/spyke">https://github.com/dguenther/spyke</a>.
+
+
+    <h2 class="title">About the math</h2>
+    <p>
+    This calculator operates under a few assumptions:
+    </p>
+    <ul>
+      <li>
+      There are two types of gear: Gear with even odds of rolling any ability,
+      and gear with different odds for rolling 2 of the 13 abilities.
+      </li>
+      <li>
+      Gear with uneven odds has a favored ability and an unfavored ability. The
+      favored ability is five times as likely to roll as neutral abilities, and
+      the unfavored ability is half as likely to roll as neutral abilities.
+      </li>
+      <li>
+      These assumptions hold true in every probabilistic case, e.g. rolling all of one ability on even-weighted gear isn't more or less likely than we would expect, given the above odds (1/13 * 1/13 * 1/13).
+      </li>
+    </ul>
+    <p>
+    Bearing this in mind, we have a few different probabilities to find, depending on how many slots we want.
+    We will define <strong>n</strong> as the number of subabilities we're looking for.
+    </p>
+    <p>
+    We also need to define <strong>r</strong> as the number of possibilities in a particular slot. For gear with
+    even odds, there are 13 subabilities weighted evenly, so <strong>r = 13</strong>. For gear with uneven odds,
+    we have 11 evenly weighted subabilities, 1 5x weighted subability, and 1 half-weighted subability:
+    <strong>11 + 5 + 1/2 = 16.5</strong>. However, since we're going to be using <strong>r</strong> as a denominator
+    later on, we don't want to deal with any fractions, so we'll multiply it by 2: <strong>r = 16.5 * 2 = 33</strong>
+    </p>
+    <p>
+    Let's also define <strong>a, b, c</strong> as the numerators for our probabilities. They'll represent the chance of rolling a particular subability in a slot. For even gear, <strong>a, b, c = 1</strong>. When divided by <strong>r</strong>, we can see that we have a <strong>1 / 13</strong> chance of rolling a particular ability in a slot. For gear with uneven odds, favored abilities <strong>a, b, c = 10</strong>, unfavored abilities <strong>a, b, c = 1</strong>, and neutral abilities <strong>a, b, c = 2</strong>.
+    </p>
+
+    <h2>n = 1</h2>
+    <p>
+    If we want at least one of an ability and don't care about the other two slots, it's easier to calculate the probability of not
+    rolling that ability in any slot. Once we have that probability, we can take the complement (subtract it from 1).
+    </p>
+    <strong>p = 1 - ((r - a) / r)<sup>3</sup></strong>
+
+    <h2>n = 2 and a and b are different</h2>
+    <p>
+    There are 6 possible rolls that could get us what we want: AB_, A_B, _AB, BA_, B_A, _BA. We know the denominator of the fraction we're solving for is <strong>r<sup>3</sup></strong>, so let's just worry about the numerator for now. We'll make equations for each of the six possible rolls and then sum them.
+    </p>
+    <ul>
+      <li><strong>AB_ = a * b * r</strong></li>
+      <li><strong>BA_ = a * b * r</strong></li>
+      <li><strong>A_B = a * (r - b) * b</strong></li>
+      <li><strong>B_A = b * (r - a) * a</strong></li>
+      <li><strong>_AB = (r - a - b) * a * b</strong></li>
+      <li><strong>_BA = (r - a - b) * a * b</strong></li>
+    </ul>
+    <p>
+    So now let's sum these and simplify them down a bit:
+    </p>
+    <p>
+    <strong>2(a * b * r) + a * (r - b) * b + b * (r - a) * a + 2((r - a - b) * a * b)</strong>
+    </p>
+    <p>
+    <strong>2abr + ab(r - b) + ab(r - a) + 2ab(r - a - b)</strong>
+    </p>
+    <p>
+    <strong>2abr + abr - ab<sup>2</sup> + abr - a<sup>2</sup>b + 2abr - 2a<sup>2</sup>b - 2ab<sup>2</sup></strong>
+    </p>
+    <p>
+      <strong>6abr - 3ab<sup>2</sup> - 3a<sup>2</sup>b</strong>
+    </p>
+    <p>
+      <strong>3ab(2r - a - b)</strong>
+    </p>
+    <p>
+    Nice, so the probability is <strong>p = 3ab(2r - a - b) / r<sup>3</sup></strong>.
+    </p>
+
+    <h2>n = 2 and a and b are same</h2>
+    <p>
+    Unlike when a and b are different, there are only 3 possible cases: AA_, A_A, _AA. Once again, we'll find equations for the 3 possible cases:
+    </p>
+    <ul>
+      <li><strong>AA_ = a * a * r</strong></li>
+      <li><strong>A_A = a * (r - a) * a</strong></li>
+      <li><strong>_AA = (r - a) * a * a</strong></li>
+    </ul>
+    <p>
+    Let's sum these and simplify them:
+    </p>
+    <p>
+    <strong>a<sup>2</sup>r + 2a<sup>2</sup>(r - a)</strong>
+    </p>
+    <p>
+    <strong>a<sup>2</sup>(r + 2(r - a)</strong>
+    </p>
+    <p>
+    <strong>a<sup>2</sup>(3r - 2a)</strong>
+    </p>
+    <p>
+    Now that we've got a simpler numerator, we can solve for the probability: <strong>p = a<sup>2</sup>(3r - 2a) / r<sup>3</sup></strong>
+    </p>
+
+    <h2>n = 3</h2>
+    <p>
+    Let's define <strong>x</strong> as the number of ways we can roll <strong>a, b, c</strong>. If a, b, c, and are all different, there are 6 cases: ABC, ACB, BAC, BCA, CAB, CBA. If a and b are the same, we have 3 cases: AAC, ACA, CAA. And finally, if a, b, and c are the same, there is just one case: AAA. Notice a pattern here? <strong>x</strong> is the factorial of the number of unique subabilities.
+    </p>
+    <p>
+    Once we've got <strong>x</strong>, it's pretty simple: <strong>p = x * a * b * c / r<sup>3</sup></strong>.
+    </p>
+  </body>
+</html>
