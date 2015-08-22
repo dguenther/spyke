@@ -116,5 +116,13 @@
     <p>
     Once we've got <strong>x</strong>, it's pretty simple: <strong>p = x * a * b * c / r<sup>3</sup></strong>.
     </p>
+
+    <h2>Expected Rolls</h2>
+    <p>
+    Expected rolls refers to the number of rolls it should take to obtain the subabilities that you want. It's pretty simple to calculate. Take a die, for example. You have a 1/6 chance of rolling each number, so you should expect to roll the die 6 times if you're looking for a particular number. You might have to roll more or less sometimes, but 6 is the average number of rolls that you'd need.
+    </p>
+    <p>
+    Based on that, we can say that the expected rolls are the inverse of the probability. Additionally, we'll raise the number to the next integer, since we can't have fractional rolls. <strong>expected rolls = ceil(1 / p)</strong>
+    </p>
   </body>
 </html>
