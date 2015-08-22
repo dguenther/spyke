@@ -99,7 +99,7 @@ function updateOdds(brand, sub1, sub2, sub3) {
         // same ability, there's just 1 permutation - AAA. If we want 3
         // different abilities, there are 6 permutations:
         // ABC, ACB, BAC, BCA, CAB, CBA.
-        p = calculateP(subOdds[0], subOdds[1], subOdds[2]);
+        p = calculateP(subs[0], subs[1], subs[2]);
         return p * subOdds[0] * subOdds[1] * subOdds[2] / Math.pow(r, 3);
     }
     if (n === 2 && subs[0] === subs[1]) {
