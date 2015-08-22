@@ -42,22 +42,6 @@ function calculateR(brand) {
     return 33;
 }
 
-function calculateAbc(rNum, brand, sub) {
-    if (rNum === 13) {
-        return 1;
-    }
-    if (sub === favored[brand]) {
-        return 10;
-    }
-    if (sub === unfavored[brand]) {
-        return 1;
-    }
-    if (!brand || brand === '') {
-        return rNum;
-    }
-    return 2;
-}
-
 function calculateP(sub1, sub2, sub3) {
     if (sub1 === sub2 && sub1 === sub3 && sub2 === sub3) {
         return 1;
@@ -67,45 +51,91 @@ function calculateP(sub1, sub2, sub3) {
     return 3;
 }
 
-function updateOdds(brand, sub1, sub2, sub3) {
-    var n = [sub1, sub2, sub3].reduce(function(prev, curr) {
-        if (curr && curr !== '') {
-            return prev + 1;
-        }
-        return prev;
-    }, 0);
-    var r = calculateR(brand);
-    var a = calculateAbc(r, brand, sub1);
-    var b = calculateAbc(r, brand, sub2);
-    var c = calculateAbc(r, brand, sub3);
-
-    var p;
-    var z;
-    if (n === 3) {
-        p = calculateP(sub1, sub2, sub3);
-        z = p * a * b * c / Math.pow(r, 3);
-    } else {
-        a = (a === r || !sub1 || sub1 === '' ? 0 : a);
-        b = (b === r || !sub2 || sub2 === '' ? 0 : b);
-        c = (c === r || !sub3 || sub3 === '' ? 0 : c);
-
-        if (n === 2 && (sub1 === sub2 || sub1 === sub3 || sub2 === sub3)) {
-            z = (3 * r * Math.pow(a, 2) - 2 * Math.pow(a, 3)) / Math.pow(r, 3);
-            z += (3 * r * Math.pow(b, 2) - 2 * Math.pow(b, 3)) / Math.pow(r, 3);
-            z += (3 * r * Math.pow(c, 2) - 2 * Math.pow(c, 3)) / Math.pow(r, 3);
-            z /= 2;
-        } else if (n === 2) {
-            z = 2 * r * a * b - b * Math.pow(a, 2) - a * Math.pow(b, 2);
-            z += 2 * r * a * c - c * Math.pow(a, 2) - a * Math.pow(c, 2);
-            z += 2 * r * b * c - c * Math.pow(b, 2) - b * Math.pow(c, 2);
-            z *= 3 / Math.pow(r, 3);
-        } else if (n === 1) {
-            z = (3 * Math.pow(r, 2) * a - 3 * r * Math.pow(a, 2) + Math.pow(a, 3)) / Math.pow(r, 3);
-            z += (3 * Math.pow(r, 2) * b - 3 * r * Math.pow(b, 2) + Math.pow(b, 3) ) / Math.pow(r, 3);
-            z += (3 * Math.pow(r, 2) * c - 3 * r * Math.pow(c, 2) + Math.pow(c, 3) ) / Math.pow(r, 3);
-        }
+function calculateAbc(r, brand, sub) {
+    // If r is 13, we're looking at a brand that has the same odds for
+    // every ability.
+    if (r === 13) {
+        return 1;
     }
-    return z;
+    // if r isn't 13, we're looking at a brand that has favored and unfavored
+    // abilities. Favored abilities roll 5 times more than regular abilities,
+    // and unfavored abilities roll half as often.
+    if (favored[brand] === sub) {
+        return 10;
+    }
+    if (unfavored[brand] === sub) {
+        return 1;
+    }
+    return 2;
+}
+
+function updateOdds(brand, sub1, sub2, sub3) {
+    var p;
+    var r;
+    var n;
+    var chanceOfFailure;
+    var subs;
+    var subOdds;
+
+    // If we don't have a brand, we can't do anything,
+    // so return 0 and save some calculation
+    if (!brand || brand === '') {
+        return 0;
+    }
+    r = calculateR(brand);
+    // Build an array of subabilities that have a value
+    subs = [sub1, sub2, sub3].filter(function(element) {
+        return (element && element !== '');
+    });
+    // Grab the top half of the probability fraction for those subabilities
+    subOdds = subs.map(function(element) {
+        return calculateAbc(r, brand, element);
+    });
+    n = subs.length;
+
+    if (n === 3) {
+        // If we want 3 specific abilities, the number of permutations is
+        // (different abilities) factorial. For example, if we want 3 of the
+        // same ability, there's just 1 permutation - AAA. If we want 3
+        // different abilities, there are 6 permutations:
+        // ABC, ACB, BAC, BCA, CAB, CBA.
+        p = calculateP(subOdds[0], subOdds[1], subOdds[2]);
+        return p * subOdds[0] * subOdds[1] * subOdds[2] / Math.pow(r, 3);
+    }
+    if (n === 2 && subs[0] === subs[1]) {
+        // If we want two of the same ability, we have 3 possible permutations:
+        // AA_, A_A, _AA.
+        return (Math.pow(subOdds[0], 2) * (3 * r - 2 * subOdds[0])) / Math.pow(r, 3);
+    }
+    if (n === 2) {
+        // If we want two different abilities, we have 6 possible permutations:
+        // AB_, BA_, A_B, B_A, _AB, _BA.
+        return ((3 * subOdds[0] * subOdds[1]) * (2 * r - subOdds[0] - subOdds[1])) / Math.pow(r, 3);
+    }
+    if (n === 1) {
+        // If we just want at least one of an ability, it's easier to calculate
+        // the chance of not getting that ability in any slot, then find the
+        // complement.
+        chanceOfFailure = (r - subOdds[0]) / r;
+        return 1 - Math.pow(chanceOfFailure, 3);
+    }
+    return 0;
+}
+
+// Given a probability, returns the number of rolls it would take to have at
+// least a 50% chance at success in future rolls.
+function getExpectedMajorityRolls(odds) {
+    return odds ? Math.ceil(Math.log10(0.5) / Math.log10(1 - odds)) : 0;
+}
+
+// Given a probability, returns the expected number of rolls before the
+// first success.
+function getExpectedRolls(odds) {
+    return odds ? Math.ceil(1 / odds) : 0;
+}
+
+function getOddPercent(odds) {
+    return odds ? (odds * 100).toFixed(4) + '%' : '';
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -119,8 +149,8 @@ document.addEventListener('DOMContentLoaded', function() {
         var sub2 = parent.getElementsByClassName('sub2')[0].value;
         var sub3 = parent.getElementsByClassName('sub3')[0].value;
         var odds = updateOdds(brand, sub1, sub2, sub3);
-        var oddPercent = odds ? (odds * 100).toFixed(4) + '%' : '';
-        var rolls = odds ? Math.ceil(Math.log10(0.5) / Math.log10(1 - odds)) : 0;
+        var oddPercent = getOddPercent(odds);
+        var rolls = getExpectedRolls(odds);
         totalRolls[type] = rolls;
         parent.getElementsByClassName('odds')[0].textContent = oddPercent;
         parent.getElementsByClassName('expected-rolls')[0].textContent = rolls || '';
